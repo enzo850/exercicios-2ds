@@ -50,7 +50,7 @@ Sistema de Cadastro de Alunos
 Deve conter um subtítulo:
 
 ```html
-Cadastro
+Cadrasto
 ```
 
 E um formulário contendo:
