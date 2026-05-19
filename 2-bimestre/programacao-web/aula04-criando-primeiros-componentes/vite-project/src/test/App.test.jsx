@@ -1,6 +1,10 @@
-import { render, screen } from "@testing-library/react";
-import { test, expect } from "vitest";
-import App from "../App";
+import { render, screen, cleanup } from "@testing-library/react"
+import { test, expect, afterEach } from "vitest"
+import App from "../App"
+
+afterEach(() => {
+  cleanup()
+})
 
 test("renderiza o componente Titulo", () => {
   render(<App />)

@@ -1,7 +1,5 @@
-export default function Paragrafo() {
-    return(
-        <div>
-            <p>Estou aprendendo React</p>
-        </div>
-    )
+function Paragrafo() {
+  return <p>Estou aprendendo React</p>
 }
+
+export default Paragrafo

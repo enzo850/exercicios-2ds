@@ -1,7 +1,8 @@
-import  Titulo  from "./components/Titulo"
-import  Paragrafo  from "./components/Paragrafo"
- 
-export default function App() {
+import Titulo from './components/Titulo'
+import Paragrafo from './components/Paragrafo'
+import './App.css'
+
+function App() {
   return(
     <div>
       <Titulo />
@@ -9,3 +10,5 @@ export default function App() {
     </div>
   )
 }
+
+export default App
