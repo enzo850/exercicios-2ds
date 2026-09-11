@@ -11,7 +11,7 @@ class Notificacao {
 
 class Email extends Notificacao {
     enviar() {
-        return `Email enviado: ${this.mensagem}`;
+        return `E-mail enviado: ${this.mensagem}`;
     }
 }
 
@@ -23,14 +23,9 @@ class SMS extends Notificacao {
 
 class App extends Notificacao {
     enviar() {
-        return `Notificação no App: ${this.mensagem}`;
+        return `Notificação no aplicativo: ${this.mensagem}`;
     }
 }
-
-module.exports = Notificacao;
-module.exports.Email = Email;
-module.exports.SMS = SMS;
-module.exports.App = App;
 // === FIM DO CÓDIGO =======================
 // === NÃO FAZER NADA ABAIXO DESSA LINHA ===
 module.exports = Notificacao
