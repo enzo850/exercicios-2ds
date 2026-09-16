@@ -128,6 +128,10 @@ _
 Classifique cada situação como **Produto** ou **Projeto**.
 
 1. Desenvolvimento de uma nova funcionalidade para um aplicativo.
+possui um objetivo claro e termina quando ela é entregue.
 2. Plataforma de cursos utilizada por milhares de alunos.
+continua a existir e recebendo boas melhorias para os usuários.
 3. Construção de um sistema para uma empresa.
+tem início, planejamento, execução e entrega de um sistema.
 4. Aplicativo de delivery utilizado diariamente pelos clientes.
+é um serviço contínuo que gera valor aos usuários.

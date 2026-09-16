@@ -204,5 +204,8 @@ Você acredita que três desses campos não são necessários e podem tornar o c
 Responda:
 
 1. Você simplesmente implementaria os cinco campos?
+Não. Antes de implementar, o programador deve compreender se todos os campos realmente são necessários e se eles ajudam a resolver um problema do usuário.
 2. O que deveria fazer antes?
+Conversar com a equipe de produto para entender.
 3. Como poderia apresentar sua preocupação à equipe?
+Analisei a mudança e percebi que alguns campos podem deixar o cadastro mais demorado para o usuário.
