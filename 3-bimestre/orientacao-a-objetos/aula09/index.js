@@ -8,6 +8,7 @@ class Usuario {
     get nome() {
         return this.#nome
     }
+    
 }
 
 const usuario = new Usuario("John")
