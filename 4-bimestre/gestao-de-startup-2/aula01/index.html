@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f4f1e9">
+  <title>Rotina Leve | Pesquisa NPS</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f4f1e9;
+      --ink: #202b27;
+      --muted: #64716b;
+      --line: #d7ddd4;
+      --green: #175c4d;
+      --green-dark: #10483c;
+      --lime: #d8ed83;
+      --white: #fffefa;
+      --red: #b64f3d;
+      --amber: #a56a16;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-width: 320px;
+      min-height: 100vh;
+      margin: 0;
+      color: var(--ink);
+      background-color: var(--paper);
+      background-image: radial-gradient(#cbd4c8 0.65px, transparent 0.65px);
+      background-size: 15px 15px;
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .page {
+      width: min(100% - 32px, 850px);
+      margin: 0 auto;
+      padding: 44px 0 56px;
+    }
+
+    .masthead {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .masthead-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .mark {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px 8px 3px 8px;
+      background: var(--green);
+      transform: rotate(-12deg);
+    }
+
+    .intro {
+      max-width: 680px;
+      padding: 52px 0 38px;
+      animation: arrive 550ms ease-out both;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--green);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.8rem, 9vw, 5.6rem);
+      font-weight: 500;
+      line-height: 0.98;
+    }
+
+    .pitch {
+      max-width: 580px;
+      margin: 20px 0 0;
+      color: #485650;
+      font-size: 1.12rem;
+      line-height: 1.65;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(240px, 0.8fr);
+      gap: 22px;
+      align-items: start;
+    }
+
+    .survey,
+    .results {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--white);
+    }
+
+    .survey {
+      padding: clamp(22px, 5vw, 34px);
+    }
+
+    .survey h2,
+    .results h2 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.55rem;
+      font-weight: 500;
+      line-height: 1.2;
+    }
+
+    .survey-hint {
+      margin: 9px 0 23px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    .rating-options {
+      display: grid;
+      grid-template-columns: repeat(11, minmax(0, 1fr));
+      gap: 6px;
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+
+    .rating-option {
+      position: relative;
+      aspect-ratio: 1;
+    }
+
+    .rating-option input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+    }
+
+    .rating-option label {
+      display: grid;
+      width: 100%;
+      height: 100%;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      color: var(--ink);
+      background: #fbfaf5;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 700;
+      transition: background-color 130ms ease, border-color 130ms ease, color 130ms ease;
+    }
+
+    .rating-option label:hover {
+      border-color: var(--green);
+      background: #edf3e5;
+    }
+
+    .rating-option input:checked + label {
+      border-color: var(--green);
+      color: white;
+      background: var(--green);
+    }
+
+    .rating-option input:focus-visible + label {
+      outline: 3px solid var(--lime);
+      outline-offset: 2px;
+    }
+
+    .scale-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.72rem;
+    }
+
+    .submit-button {
+      display: flex;
+      width: 100%;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      margin-top: 24px;
+      border: 0;
+      border-radius: 5px;
+      color: white;
+      background: var(--green);
+      cursor: pointer;
+      font-weight: 700;
+      transition: background-color 140ms ease, transform 140ms ease;
+    }
+
+    .submit-button:hover {
+      background: var(--green-dark);
+      transform: translateY(-1px);
+    }
+
+    .submit-button:focus-visible,
+    .clear-button:focus-visible {
+      outline: 3px solid var(--lime);
+      outline-offset: 3px;
+    }
+
+    .submit-button span {
+      color: var(--lime);
+      font-size: 1.2rem;
+    }
+
+    .status {
+      min-height: 1.35em;
+      margin: 12px 0 0;
+      color: var(--green);
+      font-size: 0.86rem;
+    }
+
+    .results {
+      padding: 25px;
+      animation: arrive 550ms 100ms ease-out both;
+    }
+
+    .results-top {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .response-count {
+      color: var(--muted);
+      font-size: 0.78rem;
+      white-space: nowrap;
+    }
+
+    .group-list {
+      display: grid;
+      gap: 13px;
+      margin: 19px 0 23px;
+    }
+
+    .group-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 0.9rem;
+    }
+
+    .group-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: #485650;
+    }
+
+    .group-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    .group-dot.neutral {
+      background: var(--amber);
+    }
+
+    .group-dot.detractor {
+      background: var(--red);
+    }
+
+    .group-value {
+      font-variant-numeric: tabular-nums;
+      font-weight: 800;
+    }
+
+    .nps-box {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px;
+      border-radius: 5px;
+      background: #e8efdf;
+    }
+
+    .nps-label {
+      color: #4f6156;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .nps-value {
+      color: var(--green-dark);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 2.8rem;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .clear-button {
+      display: block;
+      margin: 17px 0 0 auto;
+      padding: 5px 0;
+      border: 0;
+      color: var(--muted);
+      background: transparent;
+      cursor: pointer;
+      font-size: 0.78rem;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    @keyframes arrive {
+      from { opacity: 0; transform: translateY(9px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 650px) {
+      .page {
+        padding-top: 25px;
+      }
+
+      .intro {
+        padding: 40px 0 28px;
+      }
+
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .rating-options {
+        gap: 4px;
+      }
+
+      .rating-option label {
+        font-size: 0.83rem;
+      }
+
+      .results {
+        animation-delay: 0ms;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="masthead">
+      <span class="masthead-mark"><span class="mark" aria-hidden="true"></span> Pesquisa de produto</span>
+      <span>Uma pergunta · 10 segundos</span>
+    </header>
+
+    <section class="intro" aria-labelledby="app-title">
+      <p class="eyebrow">Seu tempo de estudo, com mais leveza</p>
+      <h1 id="app-title">Rotina Leve</h1>
+      <p class="pitch">O Rotina Leve ajuda você a organizar tarefas e criar uma rotina de estudos possível de manter.</p>
+    </section>
+
+    <div class="content-grid">
+      <form class="survey" id="nps-form">
+        <h2>De 0 a 10, quanto você recomendaria este app para um amigo?</h2>
+        <p class="survey-hint">Escolha uma nota, em que 0 significa “não recomendaria” e 10 “recomendaria com certeza”.</p>
+
+        <fieldset class="rating-options" aria-label="Nota de recomendação">
+          <div class="rating-option"><input id="nota-0" type="radio" name="nota" value="0" required><label for="nota-0">0</label></div>
+          <div class="rating-option"><input id="nota-1" type="radio" name="nota" value="1"><label for="nota-1">1</label></div>
+          <div class="rating-option"><input id="nota-2" type="radio" name="nota" value="2"><label for="nota-2">2</label></div>
+          <div class="rating-option"><input id="nota-3" type="radio" name="nota" value="3"><label for="nota-3">3</label></div>
+          <div class="rating-option"><input id="nota-4" type="radio" name="nota" value="4"><label for="nota-4">4</label></div>
+          <div class="rating-option"><input id="nota-5" type="radio" name="nota" value="5"><label for="nota-5">5</label></div>
+          <div class="rating-option"><input id="nota-6" type="radio" name="nota" value="6"><label for="nota-6">6</label></div>
+          <div class="rating-option"><input id="nota-7" type="radio" name="nota" value="7"><label for="nota-7">7</label></div>
+          <div class="rating-option"><input id="nota-8" type="radio" name="nota" value="8"><label for="nota-8">8</label></div>
+          <div class="rating-option"><input id="nota-9" type="radio" name="nota" value="9"><label for="nota-9">9</label></div>
+          <div class="rating-option"><input id="nota-10" type="radio" name="nota" value="10"><label for="nota-10">10</label></div>
+        </fieldset>
+        <div class="scale-labels" aria-hidden="true"><span>Não recomendaria</span><span>Recomendaria</span></div>
+        <button class="submit-button" type="submit">Enviar resposta <span aria-hidden="true">→</span></button>
+        <p class="status" id="status" aria-live="polite"></p>
+      </form>
+
+      <section class="results" aria-labelledby="results-title">
+        <div class="results-top">
+          <h2 id="results-title">Resultado</h2>
+          <span class="response-count" id="response-count">0 respostas</span>
+        </div>
+        <div class="group-list" aria-live="polite">
+          <div class="group-row"><span class="group-label"><span class="group-dot" aria-hidden="true"></span>Promotores</span><span class="group-value" id="promoters">0</span></div>
+          <div class="group-row"><span class="group-label"><span class="group-dot neutral" aria-hidden="true"></span>Neutros</span><span class="group-value" id="neutrals">0</span></div>
+          <div class="group-row"><span class="group-label"><span class="group-dot detractor" aria-hidden="true"></span>Detratores</span><span class="group-value" id="detractors">0</span></div>
+        </div>
+        <div class="nps-box">
+          <span class="nps-label">NPS final</span>
+          <strong class="nps-value" id="nps">—</strong>
+        </div>
+        <button class="clear-button" id="clear-responses" type="button">Limpar respostas</button>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const STORAGE_KEY = "rotina-leve-nps-respostas-v1";
+    const form = document.querySelector("#nps-form");
+    const status = document.querySelector("#status");
+
+    function loadResponses() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+        return Array.isArray(saved)
+          ? saved.filter((score) => Number.isInteger(score) && score >= 0 && score <= 10)
+          : [];
+      } catch {
+        return [];
+      }
+    }
+
+    function renderResults() {
+      const responses = loadResponses();
+      const promoters = responses.filter((score) => score >= 9).length;
+      const neutrals = responses.filter((score) => score >= 7 && score <= 8).length;
+      const detractors = responses.filter((score) => score <= 6).length;
+      const nps = responses.length === 0
+        ? null
+        : Math.round((promoters / responses.length) * 100 - (detractors / responses.length) * 100);
+
+      document.querySelector("#promoters").textContent = promoters;
+      document.querySelector("#neutrals").textContent = neutrals;
+      document.querySelector("#detractors").textContent = detractors;
+      document.querySelector("#response-count").textContent = `${responses.length} ${responses.length === 1 ? "resposta" : "respostas"}`;
+      document.querySelector("#nps").textContent = nps === null ? "—" : nps > 0 ? `+${nps}` : nps;
+    }
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const selected = new FormData(form).get("nota");
+      if (selected === null) return;
+
+      const responses = loadResponses();
+      responses.push(Number(selected));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(responses));
+      form.reset();
+      status.textContent = "Resposta registrada. Obrigado!";
+      renderResults();
+    });
+
+    document.querySelector("#clear-responses").addEventListener("click", () => {
+      localStorage.removeItem(STORAGE_KEY);
+      status.textContent = "Respostas apagadas.";
+      renderResults();
+    });
+
+    renderResults();
+  </script>
+</body>
+</html>

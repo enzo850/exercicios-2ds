@@ -235,4 +235,7 @@ Deixe a página aberta no seu computador. Visite os colegas ao lado e dê nota n
 **3. Responda**
 
 - Quantas respostas e qual o NPS?
+
+
+
 - Complete: *"Se este NPS cair, eu vou ______."*

@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f1e9">
+  <title>Rotina Leve | Funil AARRR</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f4f1e9;
+      --ink: #202b27;
+      --muted: #64716b;
+      --line: #d7ddd4;
+      --green: #175c4d;
+      --green-dark: #10483c;
+      --lime: #d8ed83;
+      --white: #fffefa;
+      --red: #b42318;
+      --red-light: #fff0ed;
+      --amber: #a56a16;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-width: 320px;
+      min-height: 100vh;
+      margin: 0;
+      color: var(--ink);
+      background-color: var(--paper);
+      background-image: radial-gradient(#cbd4c8 0.65px, transparent 0.65px);
+      background-size: 15px 15px;
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .page {
+      width: min(100% - 32px, 980px);
+      margin: 0 auto;
+      padding: 36px 0 56px;
+    }
+
+    .masthead {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .masthead-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .mark {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px 8px 3px 8px;
+      background: var(--green);
+      transform: rotate(-12deg);
+    }
+
+    .intro {
+      max-width: 700px;
+      padding: 42px 0 30px;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--green);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.8rem, 9vw, 5rem);
+      font-weight: 500;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    .pitch {
+      max-width: 600px;
+      margin: 18px 0 0;
+      color: #485650;
+      font-size: 1.08rem;
+      line-height: 1.65;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(310px, 0.85fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .panel {
+      min-width: 0;
+      padding: clamp(20px, 4vw, 30px);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--white);
+    }
+
+    h2 {
+      margin-bottom: 10px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.55rem;
+      font-weight: 500;
+      line-height: 1.2;
+    }
+
+    .panel-intro,
+    .funnel-note {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+
+    .steps {
+      display: grid;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .step-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 7px 12px;
+      align-items: center;
+      padding: 15px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fbfaf5;
+    }
+
+    .step-card h3 {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .step-description {
+      grid-column: 1;
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.45;
+    }
+
+    .step-action {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+      min-height: 42px;
+      padding: 0 12px;
+      border: 1px solid var(--green);
+      border-radius: 5px;
+      color: var(--green);
+      background: transparent;
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+
+    .step-action:hover:not(:disabled) {
+      color: #fff;
+      background: var(--green);
+    }
+
+    .step-action:focus-visible,
+    .submit-button:focus-visible,
+    .clear-button:focus-visible,
+    .rating-option input:focus-visible + label {
+      outline: 3px solid var(--lime);
+      outline-offset: 3px;
+    }
+
+    .step-action:disabled {
+      border-color: var(--line);
+      color: #87928b;
+      background: #f0f1ec;
+      cursor: not-allowed;
+    }
+
+    .funnel-note {
+      margin: 15px 0 0;
+    }
+
+    .rating-options {
+      display: grid;
+      grid-template-columns: repeat(11, minmax(0, 1fr));
+      gap: 5px;
+      margin: 17px 0 0;
+      padding: 0;
+      border: 0;
+    }
+
+    .rating-option {
+      position: relative;
+      aspect-ratio: 1;
+    }
+
+    .rating-option input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+    }
+
+    .rating-option label {
+      display: grid;
+      width: 100%;
+      height: 100%;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      color: var(--ink);
+      background: #fbfaf5;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .rating-option input:checked + label {
+      border-color: var(--green);
+      color: #fff;
+      background: var(--green);
+    }
+
+    .scale-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.72rem;
+    }
+
+    .submit-button {
+      width: 100%;
+      min-height: 44px;
+      margin-top: 18px;
+      border: 0;
+      border-radius: 5px;
+      color: #fff;
+      background: var(--green);
+      font-weight: 700;
+    }
+
+    .submit-button:hover:not(:disabled) {
+      background: var(--green-dark);
+    }
+
+    .submit-button:disabled {
+      background: #7d9086;
+      cursor: not-allowed;
+    }
+
+    .status {
+      min-height: 1.4em;
+      margin: 12px 0 0;
+      color: var(--green);
+      font-size: 0.85rem;
+    }
+
+    .status.error {
+      color: var(--red);
+    }
+
+    .funnel-table {
+      display: grid;
+      gap: 9px;
+      margin-top: 21px;
+    }
+
+    .funnel-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto auto;
+      gap: 8px 12px;
+      align-items: center;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: #fbfaf5;
+    }
+
+    .funnel-row.is-largest-drop {
+      border-color: #e6948b;
+      background: var(--red-light);
+      color: var(--red);
+    }
+
+    .stage-name {
+      font-size: 0.9rem;
+      font-weight: 750;
+    }
+
+    .stage-count {
+      font-size: 1.2rem;
+      font-variant-numeric: tabular-nums;
+      font-weight: 800;
+    }
+
+    .stage-conversion {
+      grid-column: 1 / -1;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .is-largest-drop .stage-conversion {
+      color: var(--red);
+      font-weight: 750;
+    }
+
+    .nps-result {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 16px;
+      padding: 15px;
+      border-radius: 5px;
+      background: #e8efdf;
+    }
+
+    .nps-label {
+      color: #4f6156;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .nps-value {
+      color: var(--green-dark);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 2.3rem;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .clear-button {
+      display: block;
+      margin: 16px 0 0 auto;
+      padding: 5px 0;
+      border: 0;
+      color: var(--muted);
+      background: transparent;
+      font-size: 0.78rem;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .clear-button:hover {
+      color: var(--red);
+    }
+
+    @media (max-width: 760px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .page {
+        padding-top: 22px;
+      }
+
+      .intro {
+        padding: 34px 0 25px;
+      }
+
+      .step-card {
+        grid-template-columns: 1fr;
+      }
+
+      .step-action {
+        grid-column: 1;
+        grid-row: auto;
+        width: 100%;
+      }
+
+      .rating-options {
+        gap: 3px;
+      }
+
+      .rating-option label {
+        font-size: 0.78rem;
+      }
+
+      .funnel-row {
+        grid-template-columns: minmax(0, 1fr) auto;
+      }
+
+      .stage-count {
+        grid-column: 2;
+        grid-row: 1;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="masthead">
+      <span class="masthead-mark"><span class="mark" aria-hidden="true"></span> Métricas de crescimento</span>
+      <span>Funil AARRR · Aula 2</span>
+    </header>
+
+    <section class="intro" aria-labelledby="app-title">
+      <p class="eyebrow">Seu tempo de estudo, com mais leveza</p>
+      <h1 id="app-title">Rotina Leve</h1>
+      <p class="pitch">O Rotina Leve ajuda você a organizar tarefas e criar uma rotina de estudos possível de manter.</p>
+    </section>
+
+    <div class="layout">
+      <section class="panel" aria-labelledby="journey-title">
+        <h2 id="journey-title">Experimente o app</h2>
+        <p class="panel-intro">Avance pelas etapas que fizerem sentido para você. Cada abertura em uma nova aba começa uma visita e é salva neste navegador. A avaliação NPS fica disponível depois da etapa de receita.</p>
+
+        <div class="steps">
+          <article class="step-card">
+            <h3>Ativação</h3>
+            <p class="step-description">Veja como o app pode ajudar na sua rotina.</p>
+            <button class="step-action" id="try-button" type="button">Experimentar</button>
+          </article>
+          <article class="step-card">
+            <h3>Retenção</h3>
+            <p class="step-description">Registre que você gostaria de voltar a usar.</p>
+            <button class="step-action" id="return-button" type="button" disabled>Quero usar de novo</button>
+          </article>
+          <article class="step-card">
+            <h3>Receita</h3>
+            <p class="step-description">Diga se pagaria para usar o app.</p>
+            <button class="step-action" id="pay-button" type="button" disabled>Eu pagaria por isso</button>
+          </article>
+        </div>
+
+        <form id="nps-form">
+          <fieldset class="rating-options" id="nps-ratings" aria-label="Nota de recomendação" disabled>
+            <div class="rating-option"><input id="score-0" type="radio" name="score" value="0" required><label for="score-0">0</label></div>
+            <div class="rating-option"><input id="score-1" type="radio" name="score" value="1"><label for="score-1">1</label></div>
+            <div class="rating-option"><input id="score-2" type="radio" name="score" value="2"><label for="score-2">2</label></div>
+            <div class="rating-option"><input id="score-3" type="radio" name="score" value="3"><label for="score-3">3</label></div>
+            <div class="rating-option"><input id="score-4" type="radio" name="score" value="4"><label for="score-4">4</label></div>
+            <div class="rating-option"><input id="score-5" type="radio" name="score" value="5"><label for="score-5">5</label></div>
+            <div class="rating-option"><input id="score-6" type="radio" name="score" value="6"><label for="score-6">6</label></div>
+            <div class="rating-option"><input id="score-7" type="radio" name="score" value="7"><label for="score-7">7</label></div>
+            <div class="rating-option"><input id="score-8" type="radio" name="score" value="8"><label for="score-8">8</label></div>
+            <div class="rating-option"><input id="score-9" type="radio" name="score" value="9"><label for="score-9">9</label></div>
+            <div class="rating-option"><input id="score-10" type="radio" name="score" value="10"><label for="score-10">10</label></div>
+          </fieldset>
+          <div class="scale-labels" aria-hidden="true"><span>Não recomendaria</span><span>Recomendaria</span></div>
+          <button class="submit-button" type="submit" disabled>Enviar avaliação NPS</button>
+          <p class="status" id="status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="panel" aria-labelledby="funnel-title">
+        <h2 id="funnel-title">Funil AARRR</h2>
+        <p class="panel-intro">A conversão mostra quantas visitas avançaram em relação à etapa anterior. A maior queda conhecida fica destacada em vermelho.</p>
+        <div class="funnel-table" id="funnel-results" aria-live="polite"></div>
+        <div class="nps-result">
+          <span class="nps-label">NPS final</span>
+          <strong class="nps-value" id="nps-value">—</strong>
+        </div>
+        <button class="clear-button" id="clear-button" type="button">Limpar dados do funil</button>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const FUNNEL_STORAGE_KEY = "rotina-leve-aarrr-visitas-v1";
+    const SESSION_STORAGE_KEY = "rotina-leve-aarrr-visita-atual-v1";
+    const form = document.querySelector("#nps-form");
+    const npsRatings = document.querySelector("#nps-ratings");
+    const npsSubmitButton = form.querySelector('button[type="submit"]');
+    const status = document.querySelector("#status");
+    const funnelResults = document.querySelector("#funnel-results");
+    const actionButtons = {
+      activation: document.querySelector("#try-button"),
+      retention: document.querySelector("#return-button"),
+      revenue: document.querySelector("#pay-button")
+    };
+    let sessionId;
+
+    function readJourneys() {
+      const savedJourneys = localStorage.getItem(FUNNEL_STORAGE_KEY);
+      if (savedJourneys === null) {
+        return [];
+      }
+
+      const journeys = JSON.parse(savedJourneys);
+      const isValid = Array.isArray(journeys) && journeys.every((journey) =>
+        journey !== null
+        && typeof journey === "object"
+        && typeof journey.id === "string"
+        && typeof journey.activated === "boolean"
+        && typeof journey.retained === "boolean"
+        && typeof journey.paid === "boolean"
+        && (journey.score === null || (Number.isInteger(journey.score) && journey.score >= 0 && journey.score <= 10))
+      );
+
+      if (!isValid) {
+        throw new Error("Os dados salvos do funil estão inválidos. Limpe os dados para começar novamente.");
+      }
+
+      return journeys;
+    }
+
+    function writeJourneys(journeys) {
+      localStorage.setItem(FUNNEL_STORAGE_KEY, JSON.stringify(journeys));
+    }
+
+    function getCurrentJourney(journeys) {
+      return journeys.find((journey) => journey.id === sessionId);
+    }
+
+    function startVisit() {
+      const journeys = readJourneys();
+      let currentSessionId = sessionStorage.getItem(SESSION_STORAGE_KEY);
+      let journey = currentSessionId === null
+        ? undefined
+        : journeys.find((entry) => entry.id === currentSessionId);
+
+      if (!journey) {
+        currentSessionId = window.crypto.randomUUID();
+        journey = {
+          id: currentSessionId,
+          activated: false,
+          retained: false,
+          paid: false,
+          score: null
+        };
+        journeys.push(journey);
+        writeJourneys(journeys);
+        sessionStorage.setItem(SESSION_STORAGE_KEY, currentSessionId);
+      }
+
+      sessionId = currentSessionId;
+    }
+
+    function setStatus(text, isError = false) {
+      status.textContent = text;
+      status.classList.toggle("error", isError);
+    }
+
+    function renderFunnel() {
+      const journeys = readJourneys();
+      const counts = {
+        acquisition: journeys.length,
+        activation: journeys.filter((journey) => journey.activated).length,
+        retention: journeys.filter((journey) => journey.retained).length,
+        revenue: journeys.filter((journey) => journey.paid).length,
+        recommendation: journeys.filter((journey) => journey.paid && journey.score >= 9).length
+      };
+      const stages = [
+        { key: "acquisition", label: "Aquisição", previous: null },
+        { key: "activation", label: "Ativação", previous: "acquisition" },
+        { key: "retention", label: "Retenção", previous: "activation" },
+        { key: "revenue", label: "Receita", previous: "retention" },
+        { key: "recommendation", label: "Recomendação", previous: "revenue" }
+      ];
+      let largestDrop = null;
+
+      stages.slice(1).forEach((stage) => {
+        const previousCount = counts[stage.previous];
+        if (previousCount === 0) {
+          return;
+        }
+
+        const drop = (previousCount - counts[stage.key]) / previousCount;
+        if (largestDrop === null || drop > largestDrop.drop) {
+          largestDrop = { key: stage.key, drop };
+        }
+      });
+
+      funnelResults.replaceChildren();
+      stages.forEach((stage) => {
+        const row = document.createElement("div");
+        row.className = "funnel-row";
+        if (largestDrop && stage.key === largestDrop.key) {
+          row.classList.add("is-largest-drop");
+        }
+
+        const name = document.createElement("span");
+        name.className = "stage-name";
+        name.textContent = stage.label;
+        const count = document.createElement("strong");
+        count.className = "stage-count";
+        count.textContent = counts[stage.key];
+        const conversion = document.createElement("span");
+        conversion.className = "stage-conversion";
+
+        if (stage.previous === null) {
+          conversion.textContent = "Etapa inicial";
+        } else {
+          const previousCount = counts[stage.previous];
+          const conversionRate = previousCount === 0
+            ? null
+            : Math.round((counts[stage.key] / previousCount) * 100);
+          const conversionText = conversionRate === null ? "—" : `${conversionRate}%`;
+          conversion.textContent = `Conversão: ${conversionText} da etapa anterior`;
+          if (largestDrop && stage.key === largestDrop.key) {
+            conversion.textContent += ` · Maior queda: ${Math.round(largestDrop.drop * 100)}%`;
+          }
+        }
+
+        row.append(name, count, conversion);
+        funnelResults.append(row);
+      });
+
+      const promoters = journeys.filter((journey) => journey.score !== null && journey.score >= 9).length;
+      const neutrals = journeys.filter((journey) => journey.score !== null && journey.score >= 7 && journey.score <= 8).length;
+      const detractors = journeys.filter((journey) => journey.score !== null && journey.score <= 6).length;
+      const totalResponses = promoters + neutrals + detractors;
+      const nps = totalResponses === 0
+        ? null
+        : Math.round((promoters / totalResponses) * 100 - (detractors / totalResponses) * 100);
+      document.querySelector("#nps-value").textContent = nps === null ? "—" : nps > 0 ? `+${nps}` : nps;
+
+      const currentJourney = getCurrentJourney(journeys);
+      actionButtons.activation.disabled = !currentJourney || currentJourney.activated;
+      actionButtons.retention.disabled = !currentJourney || !currentJourney.activated || currentJourney.retained;
+      actionButtons.revenue.disabled = !currentJourney || !currentJourney.retained || currentJourney.paid;
+      npsRatings.disabled = !currentJourney || !currentJourney.paid || currentJourney.score !== null;
+      npsSubmitButton.disabled = npsRatings.disabled;
+    }
+
+    function updateJourney(update, confirmation) {
+      try {
+        const journeys = readJourneys();
+        const journey = getCurrentJourney(journeys);
+        if (!journey) {
+          throw new Error("Esta visita não foi encontrada. Recarregue a página para iniciar outra.");
+        }
+
+        update(journey);
+        writeJourneys(journeys);
+        setStatus(confirmation);
+        renderFunnel();
+      } catch (error) {
+        setStatus(`Não foi possível salvar o progresso: ${error.message}`, true);
+      }
+    }
+
+    actionButtons.activation.addEventListener("click", () => {
+      updateJourney((journey) => {
+        journey.activated = true;
+      }, "Etapa de ativação registrada.");
+    });
+
+    actionButtons.retention.addEventListener("click", () => {
+      updateJourney((journey) => {
+        journey.retained = true;
+      }, "Etapa de retenção registrada.");
+    });
+
+    actionButtons.revenue.addEventListener("click", () => {
+      updateJourney((journey) => {
+        journey.paid = true;
+      }, "Etapa de receita registrada.");
+    });
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const selectedScore = new FormData(form).get("score");
+      if (selectedScore === null) {
+        return;
+      }
+
+      updateJourney((journey) => {
+        journey.score = Number(selectedScore);
+      }, Number(selectedScore) >= 9
+        ? "Avaliação salva. Nota 9 ou 10 conta como recomendação se você avançou até a etapa de receita."
+        : "Avaliação salva. Apenas notas 9 ou 10 contam como recomendação no funil.");
+      form.reset();
+    });
+
+    document.querySelector("#clear-button").addEventListener("click", () => {
+      if (!window.confirm("Apagar todas as visitas e respostas deste navegador?")) {
+        return;
+      }
+
+      try {
+        localStorage.removeItem(FUNNEL_STORAGE_KEY);
+        sessionStorage.removeItem(SESSION_STORAGE_KEY);
+        sessionId = null;
+        startVisit();
+        form.reset();
+        setStatus("Dados apagados. Esta nova abertura já foi registrada como aquisição.");
+        renderFunnel();
+      } catch (error) {
+        setStatus(`Não foi possível limpar os dados: ${error.message}`, true);
+      }
+    });
+
+    try {
+      startVisit();
+      renderFunnel();
+    } catch (error) {
+      setStatus(`Não foi possível carregar o funil: ${error.message}`, true);
+      Object.values(actionButtons).forEach((button) => {
+        button.disabled = true;
+      });
+      form.querySelector('button[type="submit"]').disabled = true;
+    }
+  </script>
+</body>
+</html>

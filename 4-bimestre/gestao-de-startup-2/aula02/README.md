@@ -192,6 +192,8 @@ Individual ou em dupla, **usando o GitHub Copilot**, transforme a página da aul
 >
 > Se não fez a aula 1, comece uma página nova com uma ideia de app.
 
+Página pronta para experimentar o funil: [index.html](./index.html).
+
 **1. Construa (5 min)**
 
 Exemplo de prompt:
