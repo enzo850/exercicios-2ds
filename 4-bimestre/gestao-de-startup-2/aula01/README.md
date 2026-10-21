@@ -236,6 +236,8 @@ Deixe a página aberta no seu computador. Visite os colegas ao lado e dê nota n
 
 - Quantas respostas e qual o NPS?
 
-
+R:32 respostas recebidas e o NPS foi 10 promotores,10 neutros e 12 detratores
 
 - Complete: *"Se este NPS cair, eu vou ______."*
+
+R:Se este NPS cair, eu vou "olhar os feedbacks e melhorar o site"
