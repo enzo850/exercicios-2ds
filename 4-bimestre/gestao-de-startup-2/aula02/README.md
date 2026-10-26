@@ -214,4 +214,9 @@ Troque de computador com os colegas ao lado. Cada um segue o funil do outro **s�
 **3. Decida**
 
 - **Decisão:** o que você mudaria no app.
+
+colocarias mais esperimentações
+
 - **Motivo:** a maior queda, com o número (ex.: *"só 2 de 6 pessoas clicaram em Experimentar"*).
+
+porque muitos usuarios colocaram negativo sem especificar os feedbacks
