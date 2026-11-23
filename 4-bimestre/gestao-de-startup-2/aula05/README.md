@@ -283,5 +283,8 @@ Confira: com os dois itens do exemplo da aula, o RICE precisa dar **300** e **3,
 
 **3. Responda**
 
-- Quais os 3 primeiros itens e o RICE de cada um?
-- A ordem do RICE mudou alguma coisa que você tinha planejado?
+- Quais os 3 primeiros itens e o RICE de cada um?R:Melhorar o site com base nos feedbacks – RICE 48.
+
+R:Melhorar a aparência do app 
+R:Melhorar a navegação do site
+- A ordem do RICE mudou alguma coisa que você tinha planejado?R: Sim. Percebi que melhorar o site com base nos feedbacks deve ser prioridade, pois pode trazer mais benefícios para os usuários. 

@@ -262,5 +262,5 @@ Confira: tente enviar só `"gente, não tá funcionando aqui, me ajuda"`. O sist
 
 **3. Responda**
 
-- O colega precisou perguntar algo? Se sim, o que faltava no pedido?
-- Qual foi o feedback recebido e **uma coisa** que você vai mudar no próximo pedido?
+- O colega precisou perguntar algo? Se sim, o que faltava no pedido?R: Não precisou perguntar, pois o pedido explicou claramente o problema, o que eu já tinha tentado e a ajuda que precisava.
+- Qual foi o feedback recebido e **uma coisa** que você vai mudar no próximo pedido?R: O feedback foi que meu pedido estava claro e organizado, facilitando o entendimento do problema. No próximo pedido, vou explicar melhor os detalhes e mostrar o que já tentei fazer antes de pedir ajuda.
