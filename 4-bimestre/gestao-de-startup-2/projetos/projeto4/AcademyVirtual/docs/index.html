@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AcademyVirtual | Plataforma de Ensino</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="header">
+        <a href="#" class="logo">
+            <span class="logo-icon">A</span>
+            Academy<span>Virtual</span>
+        </a>
+
+        <nav class="nav" id="nav">
+            <a href="#inicio">Início</a>
+            <a href="#cursos">Cursos</a>
+            <a href="#sobre">Sobre</a>
+        </nav>
+
+        <div class="header-actions">
+            <button class="btn-login" id="loginBtn">Entrar</button>
+            <button class="btn-primary" id="registerBtn">Cadastrar</button>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="inicio">
+            <div class="hero-content">
+                <span class="tag">🎓 EDUCAÇÃO SEM LIMITES</span>
+
+                <h1>
+                    Seu futuro começa com
+                    <span>conhecimento.</span>
+                </h1>
+
+                <p>
+                    Aprenda no seu ritmo, explore novos conhecimentos
+                    e transforme seus objetivos em conquistas.
+                </p>
+
+                <div class="hero-buttons">
+                    <button class="btn-primary" id="exploreBtn">
+                        Explorar cursos →
+                    </button>
+                    <button class="btn-outline" id="heroLogin">
+                        Acessar plataforma
+                    </button>
+                </div>
+
+                <div class="hero-stats">
+                    <div>
+                        <strong>+20</strong>
+                        <small>Cursos disponíveis</small>
+                    </div>
+                    <div>
+                        <strong>+500</strong>
+                        <small>Alunos cadastrados</small>
+                    </div>
+                    <div>
+                        <strong>100%</strong>
+                        <small>Aprendizado online</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-image">
+                <div class="floating-card card-top">
+                    <span>📚</span>
+                    <div>
+                        <strong>Aprenda mais</strong>
+                        <small>Todos os dias</small>
+                    </div>
+                </div>
+
+                <div class="learning-card">
+                    <div class="book-icon">🎓</div>
+                    <h3>AcademyVirtual</h3>
+                    <p>Conhecimento que transforma.</p>
+                    <div class="progress">
+                        <div></div>
+                    </div>
+                    <small>Seu próximo passo começa aqui.</small>
+                </div>
+
+                <div class="floating-card card-bottom">
+                    <span>🏆</span>
+                    <div>
+                        <strong>Continue evoluindo</strong>
+                        <small>Seu progresso importa</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="benefits" id="sobre">
+            <div class="section-heading">
+                <span class="tag">NOSSA PLATAFORMA</span>
+                <h2>Aprender ficou mais fácil</h2>
+                <p>Recursos para melhorar sua experiência de aprendizado.</p>
+            </div>
+
+            <div class="benefit-grid">
+                <article class="benefit-card">
+                    <span>💻</span>
+                    <h3>Acesso online</h3>
+                    <p>Estude de qualquer lugar e no horário que preferir.</p>
+                </article>
+
+                <article class="benefit-card">
+                    <span>📖</span>
+                    <h3>Conteúdo organizado</h3>
+                    <p>Encontre cursos e aulas em um único lugar.</p>
+                </article>
+
+                <article class="benefit-card">
+                    <span>📊</span>
+                    <h3>Acompanhe seu progresso</h3>
+                    <p>Veja sua evolução durante os estudos.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="courses-section" id="cursos">
+            <div class="section-heading">
+                <span class="tag">APRENDA ALGO NOVO</span>
+                <h2>Cursos em destaque</h2>
+                <p>Escolha um curso e comece a estudar.</p>
+            </div>
+
+            <div class="course-grid" id="courseGrid"></div>
+        </section>
+
+        <section class="cta">
+            <h2>Prepare-se para o futuro.</h2>
+            <p>Comece hoje sua jornada de aprendizado.</p>
+            <button class="btn-primary" id="ctaRegister">
+                Criar minha conta →
+            </button>
+        </section>
+    </main>
+
+    <footer>
+        <a href="#" class="logo">
+            <span class="logo-icon">A</span>
+            Academy<span>Virtual</span>
+        </a>
+        <p>© 2026 AcademyVirtual. Projeto educacional.</p>
+    </footer>
+
+    <!-- MODAL DE LOGIN E CADASTRO -->
+    <div class="modal" id="authModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeModal">×</button>
+
+            <div class="modal-logo">A</div>
+            <h2 id="modalTitle">Bem-vindo!</h2>
+            <p id="modalDescription">Entre na sua conta para continuar.</p>
+
+            <form id="authForm">
+                <div class="form-group" id="nameGroup">
+                    <label>Nome completo</label>
+                    <input type="text" id="userName" placeholder="Seu nome">
+                </div>
+
+                <div class="form-group">
+                    <label>E-mail</label>
+                    <input type="email" id="userEmail" placeholder="seu@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Senha</label>
+                    <input type="password" id="userPassword" placeholder="Sua senha" required>
+                </div>
+
+                <button type="submit" class="btn-primary full-btn" id="submitAuth">
+                    Entrar
+                </button>
+            </form>
+
+            <p class="switch-auth">
+                <span id="switchText">Não tem uma conta?</span>
+                <button id="switchMode">Cadastre-se</button>
+            </p>
+
+            <p id="authMessage" class="message"></p>
+        </div>
+    </div>
+
+    <!-- PAINEL DO ALUNO -->
+    <section class="dashboard" id="dashboard">
+        <div class="dashboard-header">
+            <div>
+                <span class="tag">ÁREA DO ALUNO</span>
+                <h1>Olá, <span id="studentName">Aluno</span>! 👋</h1>
+                <p>Continue sua jornada de aprendizado.</p>
+            </div>
+            <button class="btn-outline" id="logoutBtn">Sair</button>
+        </div>
+
+        <div class="dashboard-stats">
+            <div class="stat-card">
+                <span>📚</span>
+                <h3 id="totalCourses">0</h3>
+                <p>Cursos disponíveis</p>
+            </div>
+            <div class="stat-card">
+                <span>🎯</span>
+                <h3 id="completedCourses">0</h3>
+                <p>Cursos concluídos</p>
+            </div>
+            <div class="stat-card">
+                <span>⭐</span>
+                <h3 id="studentProgress">0%</h3>
+                <p>Progresso geral</p>
+            </div>
+        </div>
+
+        <h2>Seus cursos</h2>
+        <div class="course-grid" id="dashboardCourses"></div>
+        <button class="btn-outline" id="backHome">Voltar para o início</button>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
